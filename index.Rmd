@@ -15,12 +15,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 A box plot depicting the distribution of mpg per transmission type in the `mtcars`  data set.
 
+
 ```{r plotly, message = FALSE, warning = FALSE, echo = FALSE}
 library(plotly)
 mtcars$am <- as.factor(mtcars$am)
 transmission <- group_by(mtcars, am)
 levels(transmission$am) <- c("automatic", "manual")
-plot_ly(transmission, y = transmission$mpg, color = transmission$am, type = "box")
+plot_ly(transmission, y = transmission$mpg, color = transmission$am, type = "box")%>%
+        layout(title = "mpg per transmission type", xaxis = list(title = "transmission type",
+                yaxis = list(title = "miles per gallon")))
 ```
 
 
