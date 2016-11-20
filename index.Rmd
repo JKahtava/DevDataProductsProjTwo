@@ -1,29 +1,34 @@
 ---
-title: "Developing Data Products Project Two"
+title: Developing Data Products Week 3
 author: "Jussi Kahtava"
-date: "19 November 2016"
-output: html_document
+date: "20 November 2016"
+output: ioslides_presentation
 ---
 
-```{r setup, include=FALSE, message = FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## A chart plotted with plotly
+## Plotly presentation from mtcars dataset
 
-### 19th November, 2016
+This presentation shows a box plot depicting the distribution of mpg per transmission type in the `mtcars`  data set.
 
-A box plot depicting the distribution of mpg per transmission type in the `mtcars`  data set.
+## Slide with R Code
 
-
-```{r plotly, message = FALSE, warning = FALSE, echo = FALSE}
+```{r plotly, message = FALSE, warning = FALSE, echo = TRUE}
 library(plotly)
+library(webshot)
 mtcars$am <- as.factor(mtcars$am)
 transmission <- group_by(mtcars, am)
 levels(transmission$am) <- c("automatic", "manual")
+
+```
+
+## Slide with Plot
+
+```{r, echo=FALSE, message = FALSE, warning = FALSE}
 plot_ly(transmission, y = transmission$mpg, color = transmission$am, type = "box")%>%
         layout(title = "mpg per transmission type", xaxis = list(title = "transmission type",
                 yaxis = list(title = "miles per gallon")))
 ```
-
 
